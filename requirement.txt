@@ -1,0 +1,5 @@
+numpy
+scikit-image
+segmentation-models-pytorch
+medpy
+tensorboardX
