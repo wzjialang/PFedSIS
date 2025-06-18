@@ -68,7 +68,7 @@ We sincerely appreciate the authors for releasing the following valuable resourc
 ## Citation
 If you find this project useful, please consider citing:
 ```bibtex
-@ARTICLE{PFedSIS,
+@ARTICLE{pfedsis,
   author={Xu, Jialang and Wang, Jiacheng and Yu, Lequan and Stoyanov, Danail and Jin, Yueming and Mazomenos, Evangelos B.},
   journal={IEEE Transactions on Biomedical Engineering}, 
   title={Personalizing Federated Instrument Segmentation With Visual Trait Priors in Robotic Surgery}, 
