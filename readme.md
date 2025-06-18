@@ -1,9 +1,11 @@
 # PFedSIS: Personalizing Federated Instrument Segmentation With Visual Trait Priors in Robotic Surgery
+
 This repository contains the official PyTorch implementation of the paper:
 > [**Personalizing Federated Instrument Segmentation With Visual Trait Priors in Robotic Surgery**](https://doi.org/10.1109/LRA.2024.3505818)<br>
 > **Authors:** [Jialang Xu](https://www.linkedin.com/in/jialang-xu-778952257/), Jiacheng Wang, Lequan Yu, Danail Stoyanov, Yueming Jin, Evangelos B. Mazomenos
 
-### Abstract
+
+## Abstract
 Personalized federated learning (PFL) for surgical instrument segmentation (SIS) is a promising approach. It enables multiple clinical sites to collaboratively train a series of models in privacy, with each model tailored to the individual distribution of each site. Existing PFL methods rarely consider the personalization of multi-headed self-attention, and do not account for appearance diversity and instrument shape similarity, both inherent in surgical scenes. We thus propose PFedSIS, a novel PFL method with visual trait priors for SIS, incorporating global-personalized disentanglement (GPD), appearance-regulation personalized enhancement (APE), and shape-similarity global enhancement (SGE), to boost SIS performance in each site. GPD represents the first attempt at head-wise assignment for multi-headed self-attention personalization. To preserve the unique appearance representation of each site and gradually leverage the inter-site difference, APE introduces appearance regulation and provides customized layer-wise aggregation solutions via hypernetworks for each site's personalized parameters. The mutual shape information of instruments is maintained and shared via SGE, which enhances the cross-style shape consistency on the image level and computes the shape-similarity contribution of each site on the prediction level for updating the global parameters. PFedSIS outperforms state-of-the-art methods with +1.51% Dice, +2.11% IoU, −2.79 ASSD, −15.55 HD95 performance gains.
 
 ## Setup Instructions
@@ -14,11 +16,9 @@ git clone https://github.com/wzjialang/PFedSIS.git
 
 ### 2. Install Dependencies
 Ensure the following dependencies are installed:
-```
 - Python 3.8+
 - PyTorch 1.12+
 - CUDA 11.3+
-```
 
 Example installation:
 ```bash
@@ -40,12 +40,13 @@ After unzipping, the folder structure should look like:
 PFedSIS
 ├─ dataloaders/           # Dataset loaders and augmentations
 ├─ net/                   # Network architectures
-├─ pretrained/            # PVT pre-trained weight
+├─ pretrained/            # PVT pre-trained weights
 ├─ robotics_site_npy/     # EndoVis & SAR-RARP datasets
 ├─ scripts/               # Training and testing utilities
 ├─ utils/                 # Logging, hypernetwork utilities, etc.
-├─ weight/                # PFedSIS pre-trained weight
-└─ 
+└─ weight/                # PFedSIS pre-trained weights
+   ├─ Overall_Site{}_best.pth  # Best weights among three sites from the same epoch
+   ├─ Site{}_best.pth          # Best weights for each site (possibly from different epochs)
 ```
 
 ## Usage
