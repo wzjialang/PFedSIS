@@ -1,4 +1,4 @@
-# Personalizing Federated Instrument Segmentation With Visual Trait Priors in Robotic Surgery
+# PFedSIS: Personalizing Federated Instrument Segmentation With Visual Trait Priors in Robotic Surgery
 
 This repository contains the official PyTorch implementation of the paper:
 > [**Personalizing Federated Instrument Segmentation With Visual Trait Priors in Robotic Surgery**](https://doi.org/10.1109/LRA.2024.3505818)<br>
