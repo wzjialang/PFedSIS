@@ -140,3 +140,5 @@ def test_vis(site_index, args, dataloader, test_net1, visulization=False):
     if visulization:
         with open(args.load_path + "/log_test_overall.txt", "a") as f:
             f.write("[Overall]" + "ours:" + str(score_values1))
+    
+    return score_values1

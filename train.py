@@ -502,73 +502,74 @@ if __name__ == "__main__":
             client_model_params_list[client_idx] = list(net_clients[client_idx].state_dict().values())
 
         ## Evaluation
-        overall_score = 0
-        overall_score_iou = 0
-        for site_index in range(args.client_num):
-            this_net = net_clients[site_index]
-            dice_list = []
-            print("[Test] epoch {} testing Site {}".format(epoch_num, site_index + 1))
+        if epoch_num >= 100:
+            overall_score = 0
+            overall_score_iou = 0
+            for site_index in range(args.client_num):
+                this_net = net_clients[site_index]
+                dice_list = []
+                print("[Test] epoch {} testing Site {}".format(epoch_num, site_index + 1))
 
-            score_values = test_vis(
-                site_index,
-                args,
-                dataloader_test_clients[site_index],
-                this_net,
-                visulization=False,
-            )
+                score_values = test_vis(
+                    site_index,
+                    args,
+                    dataloader_test_clients[site_index],
+                    this_net,
+                    visulization=False,
+                )
 
-            writer.add_scalar(
-                "DICE_per_epoch/site{}".format(site_index + 1),
-                score_values[0],
-                epoch_num,
-            )
-            writer.add_scalar(
-                "IOU_per_epoch/site{}".format(site_index + 1),
-                score_values[1],
-                epoch_num,
-            )
+                writer.add_scalar(
+                    "DICE_per_epoch/site{}".format(site_index + 1),
+                    score_values[0],
+                    epoch_num,
+                )
+                writer.add_scalar(
+                    "IOU_per_epoch/site{}".format(site_index + 1),
+                    score_values[1],
+                    epoch_num,
+                )
 
-            if score_values[0] > best_score[site_index]:
-                best_score[site_index] = score_values[0]
-                best_score_iou[site_index] = score_values[1]
-                save_mode_path = os.path.join(model_path, "Site{}_best.pth".format(site_index + 1))
+                if score_values[0] > best_score[site_index]:
+                    best_score[site_index] = score_values[0]
+                    best_score_iou[site_index] = score_values[1]
+                    save_mode_path = os.path.join(model_path, "Site{}_best.pth".format(site_index + 1))
 
-                torch.save(this_net.state_dict(), save_mode_path)
+                    torch.save(this_net.state_dict(), save_mode_path)
 
+                print(
+                    "[INFO] Score/site{} Dice: {:.2f} IOU: {:.2f} Best Dice {:.2f} Best IOU {:.2f}".format(
+                        site_index + 1,
+                        score_values[0] * 100,
+                        score_values[1] * 100,
+                        best_score[site_index] * 100,
+                        best_score_iou[site_index] * 100,
+                    )
+                )
+
+                overall_score += score_values[0]
+                overall_score_iou += score_values[1]
+
+            overall_score /= args.client_num
+            overall_score_iou /= args.client_num
+            writer.add_scalar("Score_Overall/", overall_score, epoch_num)
+            writer.add_scalar("Score_Overall_iou/", overall_score_iou, epoch_num)
+
+            if overall_score > best_score_overall:
+                best_score_overall = overall_score
+                best_score_iou_overall = overall_score_iou
+
+                ## save mode
+                for site_index in range(args.client_num):
+                    save_mode_path = os.path.join(model_path, "Overall_Site{}_best.pth".format(site_index + 1))
+                    torch.save(net_clients[site_index].state_dict(), save_mode_path)
             print(
-                "[INFO] Score/site{} Dice: {:.2f} IOU: {:.2f} Best Dice {:.2f} Best IOU {:.2f}".format(
-                    site_index + 1,
-                    score_values[0] * 100,
-                    score_values[1] * 100,
-                    best_score[site_index] * 100,
-                    best_score_iou[site_index] * 100,
+                "[INFO] Dice Overall: {:.2f}  IOU Overall: {:.2f} Best Dice Overall: {:.2f} Corr IOU Overall: {:.2f}".format(
+                    overall_score * 100,
+                    overall_score_iou * 100,
+                    best_score_overall * 100,
+                    best_score_iou_overall * 100,
                 )
             )
-
-            overall_score += score_values[0]
-            overall_score_iou += score_values[1]
-
-        overall_score /= args.client_num
-        overall_score_iou /= args.client_num
-        writer.add_scalar("Score_Overall/", overall_score, epoch_num)
-        writer.add_scalar("Score_Overall_iou/", overall_score_iou, epoch_num)
-
-        if overall_score > best_score_overall:
-            best_score_overall = overall_score
-            best_score_iou_overall = overall_score_iou
-
-            ## save mode
-            for site_index in range(args.client_num):
-                save_mode_path = os.path.join(model_path, "Overall_Site{}_best.pth".format(site_index + 1))
-                torch.save(net_clients[site_index].state_dict(), save_mode_path)
-        print(
-            "[INFO] Dice Overall: {:.2f}  IOU Overall: {:.2f} Best Dice Overall: {:.2f} Corr IOU Overall: {:.2f}".format(
-                overall_score * 100,
-                overall_score_iou * 100,
-                best_score_overall * 100,
-                best_score_iou_overall * 100,
-            )
-        )
 
     f_overall_iou = 0
     f_overall_dc = 0

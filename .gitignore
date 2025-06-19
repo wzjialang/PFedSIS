@@ -3,3 +3,5 @@ robotics_site_npy/
 *.pyc
 robotics/
 *.zip
+*.txt
+*.log
