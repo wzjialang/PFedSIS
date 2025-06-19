@@ -1,4 +1,4 @@
-# PFedSIS: Personalizing Federated Instrument Segmentation With Visual Trait Priors in Robotic Surgery
+# Personalizing Federated Instrument Segmentation With Visual Trait Priors in Robotic Surgery
 
 This repository contains the official PyTorch implementation of the paper:
 > [**Personalizing Federated Instrument Segmentation With Visual Trait Priors in Robotic Surgery**](https://doi.org/10.1109/LRA.2024.3505818)<br>
@@ -63,7 +63,7 @@ python train.py --exp your_experiment_name
 - Logs and experimental results will be saved automatically under the `PFedSIS/robotics` folder.
 
 ## Acknowledgments
-We sincerely appreciate the authors for releasing the following valuable resources: [lightas/FedSeg](https://github.com/lightas/FedSeg), [KarhouTam/pFedLA](https://github.com/KarhouTam/pFedLA), [jcwang123/PFL-Seg-Trans](https://github.com/jcwang123/PFL-Seg-Trans), [whai362/PVT](https://github.com/whai362/PVT), [jingyzhang/S3R](https://github.com/jingyzhang/S3R)
+We sincerely appreciate the authors for releasing the following valuable resources: [lightas/FedSeg](https://github.com/lightas/FedSeg), [KarhouTam/pFedLA](https://github.com/KarhouTam/pFedLA), [jcwang123/PFL-Seg-Trans](https://github.com/jcwang123/PFL-Seg-Trans), [whai362/PVT](https://github.com/whai362/PVT), [jingyzhang/S3R](https://github.com/jingyzhang/S3R).
 
 ## Citation
 If you find this project useful, please consider citing:
