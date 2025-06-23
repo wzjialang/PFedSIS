@@ -30,7 +30,7 @@ pip install -r requirement.txt
 ```
 
 ### 3. Prepare Datasets
-Download the EndoVis 2017 (Site-1), EndoVis 2018 (Site-2), and SAR-RARP (Site-3) datasets [HERE](https://doi.org/10.5522/04/29356586) and unzip them under the `PFedSIS` folder:
+Download the EndoVis 2017 (Site-1), EndoVis 2018 (Site-2), and SAR-RARP (Site-3) datasets [HERE](https://figshare.com/s/24f081574ccbbb13f9f1) and unzip them under the `PFedSIS` folder:
 ```bash
 unzip robotics_site_npy.zip -d PFedSIS/
 ```
