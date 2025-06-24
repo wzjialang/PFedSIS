@@ -605,4 +605,4 @@ if __name__ == "__main__":
     f_overall_iou /= args.client_num
     f_overall_sassd /= args.client_num
     f_overall_shd95 /= args.client_num
-    print("[Best] Dice Overall: {:.2f}  IOU Overall: {:.2f} ASSD: {} HD95: {} ".format(f_overall_dc * 100, f_overall_iou * 100, f_overall_shd95, f_overall_sassd))
+    print("[Best] Dice Overall: {:.2f}  IOU Overall: {:.2f} ASSD: {} HD95: {} ".format(f_overall_dc * 100, f_overall_iou * 100, f_overall_sassd, f_overall_shd95))
